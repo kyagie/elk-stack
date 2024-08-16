@@ -1,18 +1,12 @@
-# Use the official Ubuntu base image
-FROM ubuntu:20.04
-
-# Update and install any necessary packages (e.g., for testing)
-RUN apt-get update && apt-get install -y \
-    curl \
-    vim \
-    screen \
-    && apt-get clean
-
-# Create a directory for the volume
-RUN mkdir -p /data
-
-# Set the working directory
-WORKDIR /data
-
-# Set an entry point to keep the container running
-CMD ["tail", "-f", "/dev/null"]
+FROM python:3
+ARG WORKDIR=/app
+RUN mkdir -p $WORKDIR
+ADD ./plato $WORKDIR
+WORKDIR $WORKDIR
+RUN pip install git+https://github.com/toluaina/pgsync.git
+COPY ./docker/wait-for-it.sh wait-for-it.sh
+ARG APP_NAME=plato
+ENV APP_NAME=$APP_NAME
+COPY ./docker/runserver.sh runserver.sh
+RUN chmod +x wait-for-it.sh
+RUN chmod +x runserver.sh

@@ -1,0 +1,18 @@
+[
+    {
+        "database": "plato",
+        "nodes": {
+            "table": "user_logs",
+            "schema": "public",
+            "columns": [
+                "id",
+                "user_id",
+                "entity",
+                "description",
+                "type",
+                "ip_address",
+                "url"
+            ]
+        }
+    }
+]
