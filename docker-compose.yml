@@ -1,0 +1,9 @@
+services:
+  ubuntu:
+    build: .
+    volumes:
+      - ubuntu_data:/data
+    tty: true
+
+volumes:
+  ubuntu_data:
