@@ -5,4 +5,4 @@ wait-for-it $REDIS_HOST:6379 -t 60
 wait-for-it $ELASTICSEARCH_HOST:9200 -t 60
 
 bootstrap --config ./schema.json
-pgsync --config ./schema.json --daemon
+pgsync --config ./schema.json
