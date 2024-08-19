@@ -1,16 +1,4 @@
-FROM python:latest
+FROM docker.elastic.co/logstash/logstash:8.15.0
 
-WORKDIR /usr/src/app
-
-COPY ./pgsync ./
-
-RUN chmod +x ./entrypoint.sh
-
-RUN pip install pgsync
-
-RUN apt update \
-    && apt install -y moreutils \
-    && apt install -y jq \
-    && apt install -y wait-for-it
-
-ENTRYPOINT ["bash", "./entrypoint.sh"]
+COPY ./logstash.conf /usr/share/logstash/pipeline/logstash.conf
+COPY ./postgresql-42.7.3.jar /usr/share/logstash/postgresql-42.7.3.jar
