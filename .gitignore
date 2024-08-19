@@ -1,2 +1,3 @@
 /data
 /logstash/*
+*.jar
